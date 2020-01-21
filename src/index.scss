@@ -1,0 +1,111 @@
+.page-wrapper {
+    background-color: #091B23;
+    padding: 15px;
+    font-family: 'arial';
+
+  .page-header {
+    display: flex;
+    align-items: flex-end;
+    min-height: 250px;
+    background-image: url("./images/green-header-logo.png");
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: 50% 30%;
+    margin-bottom: 50px;
+  }
+
+  .page-content__container {
+    max-width: 1280px;
+    margin: auto;
+
+    .movie-list {
+
+      &__heading {
+        color: #fff;
+        font-size: 22px;
+        padding: 0 10px;
+      }
+
+      &__list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        &-item {
+          margin: 10px;
+          position: relative;
+        }
+      }
+
+      &__title {
+        color: #fff;
+        font-weight: 100;
+        font-size: 12px;
+        margin: 10px 0;
+      }
+
+      &__release-date {
+        color: #A3D1E4;
+        font-size: 12px;
+        margin: 0;
+      }
+
+      &__popularity {
+        color: #fff;
+        background-color: red;
+        border-radius: 5px;
+        position: absolute;
+        margin: 0;
+        padding: 2px 4px;
+        top: 5px;
+        left: 5px;
+      }
+
+      &__poster {
+          border-radius: 10px;
+      }
+    }
+  }
+}
+.page-header {
+  display: flex;
+  justify-content: center;
+
+  form#movieSearch {
+    position: relative;
+    margin: 0 15px;
+    width: 80%;
+
+    .input {
+      border: none;
+      border-radius: 20px;
+      padding: 5px 10px;
+      height: 35px;
+      font-size: 14px;
+      width: 100%;
+
+      &::-webkit-input-placeholder {
+        color: #01e675;
+      }
+    }
+    .submit-button {
+      border-radius: 0 20px 20px 0;
+      background-image: url('./images/search-icon.png');
+      background-color: transparent;
+      background-size: 17px;
+      height: 35px;
+      width: 35px;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: absolute;
+      border: 0;
+      top: 5px;
+      right: -10px;
+    }
+  }
+}
+
