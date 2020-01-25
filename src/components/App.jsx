@@ -3,7 +3,6 @@ import {BrowserRouter, Route} from 'react-router-dom'
 
 import Header from './Header'
 import Movies from './Movies'
-import MovieList from './MovieList'
 import MovieDetails from './MovieDetails'
 
 const App = (props) => {

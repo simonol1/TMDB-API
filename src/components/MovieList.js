@@ -7,7 +7,7 @@ const MovieList = (props) => {
     const stub = 'https://image.tmdb.org/t/p/w185';
     return (
       <div>
-        <Link to={`/details/${id}`}>
+        <Link to={`/details`}>
           <li className="movie-list__list-item" key={m.id}>
             <img className="movie-list__poster" src={stub + m.poster_path}/>
             <h5 className="movie-list__title">{m.title}</h5>

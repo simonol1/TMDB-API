@@ -16,22 +16,14 @@ import Loading from './Loading'
 
         return (
             <div>
-                <h1>{props.movie.title}</h1>
-                {/* <div><img src={imagePath} alt={props.name}/></div>
-                <h3>{actualDescription}</h3>
-                <hr></hr>
-                <h3>Featuring in
-                    {comics !== [] && " no comics at this stage"}
-                </h3>
-                <ul>
-                    {comics.map((comic) =><span key={comic.resourceURI}><li>{comic.name} </li></span> )}
-                </ul> */}
+                <h1>{this.props.match.params.id}</h1>
             </div>
     )
 }
 
 export class MovieDetails extends React.Component {
     componentDidMount() {
+        console.log('component mounted');
         const id = this.props.match.params.id; // nested object
         this.props.dispatch(getMoviebyId(id))
         // use this to help the function remember props
@@ -39,25 +31,27 @@ export class MovieDetails extends React.Component {
 
     render () {
         const { movie} = this.props;
-        const hasMovieData = Object.keys(character).length !== 0;
+        console.log('test');
         return (
             <div>
-                {!hasMovieData && <Loading />}
-                {hasMovieData && renderMovieDetails(movie)}
+              <p>testing</p>
+                {renderMovieDetails(movie)}
             </div>
         )
     }
 }
 // export mapStateToProps outside of connect so that it can be tested more easily
 
-export const mapStateToProps = (state, ownProps) => {
-    const id = ownProps.match.params.id;
+// export const mapStateToProps = (state, ownProps) => {
+//     const id = ownProps.match.params.id;
+//     console.log(id);
+//     const movie = state.movies.results.find(movie => {
+//         return movie.id.toString() === id
+//     }) || {}
 
-    const movie = state.movies.results.find(movie => {
-        return movie.id.toString() === id
-    }) || {}
+//     return { movie }
+// }
 
-    return { movie }
-}
+// export default connect(mapStateToProps)(MovieDetails)
 
-export default connect(mapStateToProps)(MovieDetails)
+export default MovieDetails
