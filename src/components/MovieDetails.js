@@ -6,52 +6,60 @@ import {getMoviebyId} from '../actions/movies'
 import Loading from './Loading'
 
 
-  const renderMovieDetails = (props) => {
-        // const ext = props.thumbnail.extension
-        // const path = props.thumbnail.path
-        // const imagePath = path + "/standard_fantastic." + ext
-        // const info = props.description
-        // const actualDescription = (info == "" )? "I'm the most exciting hero in the world...where is my description!!" : props.description
-        // const comics = props.comics.items;
+const renderMovieDetails = (movie) => {
+  const m = movie;
+  const userScore = Math.round(m.vote_average * 10) + '%';
+  const stub = 'https://image.tmdb.org/t/p/';
+  const background = stub + 'w780' + m.backdrop_path;
 
-        return (
-            <div>
-                <h1>{this.props.match.params.id}</h1>
-            </div>
-    )
+  return (
+    <div>
+      <div className='movie__background--image' style={{ backgroundImage: `url(${background})` }}>
+          <img className="movie__poster" src={stub + 'w185' + m.poster_path}/>
+      </div>
+      <div className='movie__details'>
+        <h1 className="movie__title">{m.title}</h1>
+        <p>{m.release_date}</p>
+        <p>{m.runtime}</p>
+        <p>{userScore} User score </p>
+      </div>
+      <div className="movie__overview">
+        <h3>Overview</h3>
+        <p>{m.overview}</p>
+      </div>
+    </div>
+  )
 }
 
 export class MovieDetails extends React.Component {
-    componentDidMount() {
-        console.log('component mounted');
-        const id = this.props.match.params.id; // nested object
-        this.props.dispatch(getMoviebyId(id))
-        // use this to help the function remember props
-    }
+componentDidMount() {
+  const id = this.props.match.params.id; // nested object
+  this.props.dispatch(getMoviebyId(id))
+  // use this to help the function remember props
+}
 
-    render () {
-        const { movie} = this.props;
-        console.log('test');
-        return (
-            <div>
-              <p>testing</p>
-                {renderMovieDetails(movie)}
-            </div>
-        )
-    }
+render () {
+  const { movie } = this.props;
+  console.log(movie);
+  const hasMovieData = Object.keys(movie).length !== 0;
+  return (
+      <div>
+          {!hasMovieData && <Loading />}
+          {hasMovieData && renderMovieDetails(movie)}
+      </div>
+  )
+}
 }
 // export mapStateToProps outside of connect so that it can be tested more easily
 
-// export const mapStateToProps = (state, ownProps) => {
-//     const id = ownProps.match.params.id;
-//     console.log(id);
-//     const movie = state.movies.results.find(movie => {
-//         return movie.id.toString() === id
-//     }) || {}
+export const mapStateToProps = (state, ownProps) => {
+const id = ownProps.match.params.id;
 
-//     return { movie }
-// }
+const movie = state.movies.results.find(movie => {
+  return movie.id.toString() === id
+}) || {}
 
-// export default connect(mapStateToProps)(MovieDetails)
+return { movie }
+}
 
-export default MovieDetails
+export default connect(mapStateToProps)(MovieDetails)

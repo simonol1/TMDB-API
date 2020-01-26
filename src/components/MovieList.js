@@ -1,23 +1,42 @@
 import React from 'react'
-import { Link } from "react-router-dom"
+import {connect} from 'react-redux'
 
-const MovieList = (props) => {
-    const m = props.movie;
+import {getMovies} from '../actions/movies'
 
-    const stub = 'https://image.tmdb.org/t/p/w185';
-    return (
-      <div>
-        <Link to={`/details`}>
-          <li className="movie-list__list-item" key={m.id}>
-            <img className="movie-list__poster" src={stub + m.poster_path}/>
-            <h5 className="movie-list__title">{m.title}</h5>
-            <p className="movie-list__popularity">{m.popularity}</p>
-            <p className="movie-list__release-date">{m.release_date}</p>
-          </li>
-        </Link>
-      </div>
-    )
-}
+import Movies from './Movies'
+import Loading from './Loading'
 
-export default MovieList
+export class MovieList extends React.Component {
 
+    componentWillMount() {
+      if (this.props.movies.length === 0) {
+        this.props.dispatch(getMovies())
+      };
+    }
+
+    render() {
+      const { loading } = this.props;
+      // console.log(this.props);
+      return (
+          <div>
+            {loading &&
+              <Loading />
+            }
+            <ul className="movie-list__list">
+              {!loading &&
+              this.props.movies.map((movie) => <Movies movie={movie} key={movie.id} />)}
+              }
+            </ul>
+          </div>
+      )
+    }
+  }
+
+  export const mapStateToProps = (state) => {
+    return {
+      movies: state.movies.results,
+      loading: state.movies.loading
+     }
+  }
+
+  export default connect(mapStateToProps)(MovieList)

@@ -40,7 +40,6 @@ export function getMovies () {
        request
         .get(`https://api.themoviedb.org/3/movie/${id}?api_key=6ed12e064b90ae1290fa326ce9e790ff&language=en-US`)
         .end((err, res) => {
-          console.log(res.body.results);
           err ? dispatch(setErrorMessage("ERROR:" + err.message)) : dispatch(receiveMovies(res.body.results))
         })
       }
