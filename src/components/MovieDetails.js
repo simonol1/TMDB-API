@@ -11,17 +11,19 @@ const renderMovieDetails = (movie) => {
   const userScore = Math.round(m.vote_average * 10) + '%';
   const stub = 'https://image.tmdb.org/t/p/';
   const background = stub + 'w780' + m.backdrop_path;
+  const releaseDate = new Date(m.release_date);
+  const getYear = releaseDate.getFullYear();
 
   return (
     <div>
       <div className='movie__background--image' style={{ backgroundImage: `url(${background})` }}>
+          <a className="home-link" href="/"><span></span></a>
           <img className="movie__poster" src={stub + 'w185' + m.poster_path}/>
       </div>
       <div className='movie__details'>
         <h1 className="movie__title">{m.title}</h1>
-        <p>{m.release_date}</p>
+        <p>{getYear} - {userScore} User score</p>
         <p>{m.runtime}</p>
-        <p>{userScore} User score </p>
       </div>
       <div className="movie__overview">
         <h3>Overview</h3>
@@ -40,7 +42,6 @@ componentDidMount() {
 
 render () {
   const { movie } = this.props;
-  console.log(movie);
   const hasMovieData = Object.keys(movie).length !== 0;
   return (
       <div>

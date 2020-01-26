@@ -32,16 +32,26 @@ export function getMovies () {
        .end((err, res) => {
         err ? dispatch(setErrorMessage("ERROR:" + err.message)) : dispatch(receiveMovies(res.body.results))
       })
-     }
+  }
+}
+
+  export function getMoviebyId (id) {
+    return (dispatch) => {
+      request
+      .get(`https://api.themoviedb.org/3/movie/${id}?api_key=6ed12e064b90ae1290fa326ce9e790ff&language=en-US`)
+      .end((err, res) => {
+        err ? dispatch(setErrorMessage("ERROR:" + err.message)) : dispatch(receiveMovies(res.body.results))
+      })
+  }
+}
+
+export function getSearchedMovies (searchTerm) {
+  return (dispatch) => {
+    request
+     .get(`https://api.themoviedb.org/3/movie/?api_key=6ed12e064b90ae1290fa326ce9e790ff&language=en-US&s=${
+      searchTerm}`)
+     .end((err, res) => {
+       err ? dispatch(setErrorMessage("ERROR:" + err.message)) : dispatch(receiveMovies(res.body.results))
+     })
    }
-
-   export function getMoviebyId (id) {
-     return (dispatch) => {
-       request
-        .get(`https://api.themoviedb.org/3/movie/${id}?api_key=6ed12e064b90ae1290fa326ce9e790ff&language=en-US`)
-        .end((err, res) => {
-          err ? dispatch(setErrorMessage("ERROR:" + err.message)) : dispatch(receiveMovies(res.body.results))
-        })
-      }
-    }
-
+ }

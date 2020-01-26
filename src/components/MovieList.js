@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 import {getMovies} from '../actions/movies'
+import {getSearchedMovies} from '../actions/movies'
 
 import Movies from './Movies'
 import Loading from './Loading'
@@ -14,6 +15,19 @@ export class MovieList extends React.Component {
       };
     }
 
+    handleChange = event => {
+      this.setState({
+          searchTerm: event.target.value
+      });
+    };
+
+    search = event => {
+      event.preventDefault();
+      const searchTerm = event.target.value;
+      this.props.dispatch(getSearchedMovies(searchTerm))
+      console.log(searchTerm);
+    };
+
     render() {
       const { loading } = this.props;
       // console.log(this.props);
@@ -22,6 +36,15 @@ export class MovieList extends React.Component {
             {loading &&
               <Loading />
             }
+            <form className="form" id="movieSearch" onSubmit={this.search}>
+              <input
+                type="text"
+                className="input"
+                placeholder="Search"
+                onChange={this.handleChange}
+              />
+              <button className="submit-button"></button>
+            </form>
             <ul className="movie-list__list">
               {!loading &&
               this.props.movies.map((movie) => <Movies movie={movie} key={movie.id} />)}
