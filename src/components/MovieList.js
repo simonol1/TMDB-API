@@ -41,9 +41,11 @@ export class MovieList extends React.Component {
                 type="text"
                 className="input"
                 placeholder="Search"
+                name="Search input"
+                aria-label="Search"
                 onChange={this.handleChange}
               />
-              <button className="submit-button"></button>
+              <button name="submit button" className="submit-button"></button>
             </form>
             <ul className="movie-list__list">
               {!loading &&
