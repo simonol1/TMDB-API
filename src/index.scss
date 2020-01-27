@@ -17,20 +17,20 @@ body {
     background-image: url("./images/green-header-logo.png");
     background-size: 70px;
     background-repeat: no-repeat;
-    background-position: 50% 30%;
+    background-position: 50%;
 
     .single-line {
       position: absolute;
-      left: -10px;
-      bottom: 25px;
+      left: -40px;
+      bottom: 50px;
       height: 3px;
-      width: 160px;
+      width: 220px;
       background-color: #01d277;
       transform: rotate(135deg);
 
       &:last-child {
         left: auto;
-        right: -10px;
+        right: -15px;
       }
     }
 
@@ -45,7 +45,7 @@ body {
 
       &:nth-child(2) {
         left: auto;
-        right: 40px;
+        right: 60px;
 
 
         &:after {
